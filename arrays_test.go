@@ -505,16 +505,9 @@ func TestMap(t *testing.T) {
 		t.Run(testCase.name, func(t *testing.T) {
 			result := Map(testCase.input, testCase.transform, testCase.arg)
 
-			// Convert result to []string for comparison
-			resultStrings := make([]string, len(result))
-			for i, val := range result {
-				resultStrings[i] = val
+			if !reflect.DeepEqual(result, testCase.expected) {
+				t.Errorf("expected %v but got %v", testCase.expected, result)
 			}
-
-			if !reflect.DeepEqual(resultStrings, testCase.expected) {
-				t.Errorf("expected %v but got %v", testCase.expected, resultStrings)
-			}
-			// Additional assertions if needed
 		})
 	}
 }
