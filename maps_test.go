@@ -7,6 +7,61 @@ import (
 	"testing"
 )
 
+func TestGetOrDefault(t *testing.T) {
+	t.Parallel()
+
+	// Test cases
+	testCases := []struct {
+		name         string
+		inputMap     map[string]int
+		key          string
+		defaultValue int
+		expected     int
+	}{
+		{
+			name: "existing key",
+			inputMap: map[string]int{
+				"foo": 42,
+				"bar": 24,
+			},
+			key:          "foo",
+			defaultValue: 0,
+			expected:     42,
+		},
+		{
+			name: "non-existing key",
+			inputMap: map[string]int{
+				"foo": 42,
+				"bar": 24,
+			},
+			key:          "baz",
+			defaultValue: 10,
+			expected:     10,
+		},
+		{
+			name: "zero default value",
+			inputMap: map[string]int{
+				"foo": 42,
+				"bar": 24,
+			},
+			key:          "baz",
+			defaultValue: 0,
+			expected:     0,
+		},
+	}
+
+	// Run test cases
+	for _, testCase := range testCases {
+		t.Run(testCase.name, func(t *testing.T) {
+			result := GetOrDefault(testCase.inputMap, testCase.key, testCase.defaultValue)
+
+			if result != testCase.expected {
+				t.Errorf("Test case '%s': expected %v but got %v", testCase.name, testCase.expected, result)
+			}
+		})
+	}
+}
+
 func TestKeys(t *testing.T) {
 	t.Parallel()
 

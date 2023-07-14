@@ -1,5 +1,14 @@
 package ut
 
+// Get returns the value if found, otherwise returns the zero value of the type
+func GetOrDefault[T comparable, V any](m map[T]V, key T, defaultValue V) V {
+	value, ok := m[key]
+	if !ok {
+		return defaultValue
+	}
+	return value
+}
+
 // Keys returns a slice containing all the keys from the given map.
 func Keys[T comparable, U any](m map[T]U) []T {
 	keys := make([]T, 0, len(m))
