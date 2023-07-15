@@ -1,4 +1,4 @@
-package ut
+package fusion
 
 // Keys returns a slice containing all the keys from the given map.
 func Keys[T comparable, U any](m map[T]U) []T {
