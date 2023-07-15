@@ -1,4 +1,4 @@
-package ut
+package fusion
 
 // Get returns the value if found, otherwise returns the zero value of the type
 func GetOrDefault[T comparable, V any](m map[T]V, key T, defaultValue V) V {
