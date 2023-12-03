@@ -1,5 +1,7 @@
 package fusion
 
+import "reflect"
+
 // GetOrDefault returns the value if found, otherwise returns the provided default value
 func GetOrDefault[T comparable, V any](m map[T]V, key T, defaultValue V) V {
 	value, ok := m[key]
@@ -36,6 +38,19 @@ func MapValues[K comparable, V any, R any](m map[K]V, fn func(K, V) R) []R {
 		values = append(values, fn(k, v))
 	}
 	return values
+}
+
+// ReverseMap reverse the slice of maps provided to it
+// and returns a slice of map containing maps in reverse order of input.
+//Uses Swapper function of reflect package
+func ReverseMap[K comparable, V any](maps ...map[K]V) []map[K]V {
+	swapFunction := reflect.Swapper(maps)
+	lengthOfMapsSlice := len(maps)
+	maxSwapIndex := lengthOfMapsSlice / 2
+	for i := 0; i <= maxSwapIndex; i++ {
+		swapFunction(i, lengthOfMapsSlice-1-i)
+	}
+	return maps
 }
 
 // Merge merges multiple maps into a single map.
