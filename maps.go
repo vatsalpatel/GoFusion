@@ -65,6 +65,20 @@ func Merge[K comparable, V any](maps ...map[K]V) map[K]V {
 	return result
 }
 
+// MergeFirst merges multiple maps into a single map. It's a bit different from Merge.
+// If duplicate keys are encountered, the value from the First map in the input order is used.
+func MergeFirst[K comparable, V any](maps ...map[K]V) map[K]V {
+	//first we reverse the maps slice, then Merge
+	Reverse(maps) //from arrays.go
+	result := make(map[K]V)
+	for _, m := range maps {
+		for k, v := range m {
+			result[k] = v
+		}
+	}
+	return result
+}
+
 // Omit creates a new map without the specified keys and their corresponding values from the input map.
 func Omit[K comparable, V any](input map[K]V, keys ...K) map[K]V {
 	omitKeys := make(map[K]struct{})
