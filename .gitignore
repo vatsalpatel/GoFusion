@@ -8,14 +8,8 @@
 *.so
 *.dylib
 
-#intellj IDE specific stuff
-# User-specific stuff
+#intellj IDE specific
 *.idea
-.idea/**/workspace.xml
-.idea/**/tasks.xml
-.idea/**/usage.statistics.xml
-.idea/**/dictionaries
-.idea/**/shelf
 
 # Test binary, built with `go test -c`
 *.test

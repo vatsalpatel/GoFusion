@@ -42,7 +42,7 @@ func MapValues[K comparable, V any, R any](m map[K]V, fn func(K, V) R) []R {
 
 // ReverseMap reverse the slice of maps provided to it
 // and returns a slice of map containing maps in reverse order of input.
-//Uses Swapper function of reflect package
+// Uses Swapper function of reflect package
 func ReverseMap[K comparable, V any](maps ...map[K]V) []map[K]V {
 	swapFunction := reflect.Swapper(maps)
 	lengthOfMapsSlice := len(maps)
@@ -56,20 +56,6 @@ func ReverseMap[K comparable, V any](maps ...map[K]V) []map[K]V {
 // Merge merges multiple maps into a single map.
 // If duplicate keys are encountered, the value from the last map in the input order is used.
 func Merge[K comparable, V any](maps ...map[K]V) map[K]V {
-	result := make(map[K]V)
-	for _, m := range maps {
-		for k, v := range m {
-			result[k] = v
-		}
-	}
-	return result
-}
-
-// MergeFirst merges multiple maps into a single map. It's a bit different from Merge.
-// If duplicate keys are encountered, the value from the First map in the input order is used.
-func MergeFirst[K comparable, V any](maps ...map[K]V) map[K]V {
-	//first we reverse the maps slice, then Merge
-	Reverse(maps) //from arrays.go
 	result := make(map[K]V)
 	for _, m := range maps {
 		for k, v := range m {
